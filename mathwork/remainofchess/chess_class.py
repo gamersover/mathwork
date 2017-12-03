@@ -19,8 +19,7 @@ class Chess:
         self.radius_y = screen_size[0]/chess_size[0]
         self.radius_x = screen_size[1]/chess_size[1]
         self.radius = min(self.radius_x, self.radius_y)/4
-        
-        self.flag = [0 ,0 ,0 ,0]
+
         self.founder = Founder()   #new a Founder obj
    
     def draw_chess(self):
@@ -86,8 +85,7 @@ class Chess:
     def update_matrix(self, new_position):
         self.chess_matrix[tuple(self.start_position)] = 0
         self.start_position = new_position
-        self.chess_matrix[tuple(self.start_position)] = 2
-        self.flag = [0, 0, 0, 0]    
+        self.chess_matrix[tuple(self.start_position)] = 2 
     
     def get_score(self):
         remain = np.sum(self.chess_matrix) - 1
