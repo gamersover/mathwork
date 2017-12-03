@@ -20,7 +20,7 @@ class Chess:
         self.radius_x = screen_size[1]/chess_size[1]
         self.radius = min(self.radius_x, self.radius_y)/4
 
-        self.founder = Founder()   #new a Founder obj
+        self.founder = Founder()
    
     def draw_chess(self):
         
