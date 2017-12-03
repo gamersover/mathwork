@@ -1,1 +1,1 @@
-# a game implemention of the remain of chess problem
+# a game implementation of the remain of chess problem
