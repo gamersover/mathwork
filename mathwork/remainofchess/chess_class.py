@@ -46,9 +46,7 @@ class Chess:
         
         #jugement flag is all 1 then game is over
         if all(self.flag):
-            score = self.get_score()
-            print "game over and your final score is %d" %(score) 
-            sys.exit()
+            self.terminal()
         else:
             if action == "up":
                 self.flag[0] = 1
@@ -92,3 +90,8 @@ class Chess:
         remain = np.sum(self.chess_matrix) - 1
         score = self.chess_size_x*self.chess_size_y - remain
         return score
+    
+    def terminal(self):
+        score = self.get_score()
+        print "game over and your final score is %d" %(score) 
+        sys.exit()
