@@ -36,47 +36,50 @@ class Chess:
     
     def game_start(self):
         
-        self.start_y, self.start_x = map(int, raw_input("please input your start position like 1 2:").split())
-        self.start_position = [self.start_x-1, self.start_y-1]
-        self.chess_matrix[tuple(self.start_position)] = 2
-        print "game start"
-        self.draw_chess()
+        while True:
+            self.start_y, self.start_x = map(int, raw_input("please input your start position like 1 2:").split())
+            if 1 <= self.start_x <= self.chess_size_x and 1 <= self.start_y <= self.chess_size_y: 
+                self.start_position = [self.start_x-1, self.start_y-1]
+                self.chess_matrix[tuple(self.start_position)] = 2
+                print "game start"
+                self.draw_chess()
+                break
+            else:
+                print "your input position is meaningless!"
+            
+    
+    def game_over(self):
+        score = self.get_score()
+        print "game over and your final score is %d" %(score) 
+        sys.exit()
     
     def step(self, action):
         
-        #jugement flag is all 1 then game is over
-        if all(self.flag):
-            self.terminal()
+        self.check_terminal()
+        if not any(self.is_found):
+            self.game_over()
         else:
             if action == "up":
-                self.flag[0] = 1
-                is_found, new_position = self.founder.found_up(self.chess_matrix, self.start_position)
-                if is_found:
-                    self.update_matrix(new_position)
+                if self.is_found[0]:
+                    self.update_matrix(self.new_position[0])
                 else:
                     print "warning:up is not permission!"
                     
             elif action == "down":
-                self.flag[1] = 1
-                is_found, new_position = self.founder.found_down(self.chess_matrix, self.start_position)
-                if is_found:
-                    self.update_matrix(new_position)
+                if self.is_found[1]:
+                    self.update_matrix(self.new_position[1])
                 else:
                     print "warning:down is not permission!"
                 
             elif action == "left":
-                self.flag[2] = 1
-                is_found, new_position = self.founder.found_left(self.chess_matrix, self.start_position)
-                if is_found:
-                    self.update_matrix(new_position)
+                if self.is_found[2]:
+                    self.update_matrix(self.new_position[2])
                 else:
                     print "warning:left is not permission!"
                 
             elif action == 'right':
-                self.flag[3] = 1
-                is_found, new_position = self.founder.found_right(self.chess_matrix, self.start_position)
-                if is_found:
-                    self.update_matrix(new_position)
+                if self.is_found[3]:
+                    self.update_matrix(self.new_position[3])
                 else:
                     print "warning:right is not permission!"
     
@@ -91,7 +94,6 @@ class Chess:
         score = self.chess_size_x*self.chess_size_y - remain
         return score
     
-    def terminal(self):
-        score = self.get_score()
-        print "game over and your final score is %d" %(score) 
-        sys.exit()
+    def check_terminal(self):
+        self.is_found, self.new_position = self.founder.found(self.chess_matrix, self.start_position)
+    

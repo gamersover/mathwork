@@ -3,9 +3,16 @@ from chess_class import Chess
 
 pygame.init()
 screen_size = [300, 300]
-chess_size = [1, 9]
 screen = pygame.display.set_mode(screen_size, 0, 32)
 Action = ["up", "down", "left", "right"]
+
+def get_chess_size():
+    while True:
+        chess_x, chess_y = map(int, raw_input("please your chess size like 4 4:").split())
+        if chess_x < 3 and chess_y < 3:
+            print("your input chess size is meaningless!")
+        else:
+            return [chess_x, chess_y]
 
 def run(chess):
     chess.draw_chess()
@@ -24,11 +31,13 @@ def run(chess):
                 chess.step(action)
             
             if event.type == pygame.QUIT:
-                chess.terminal()
+                chess.game_over()
                         
         chess.draw_chess()
 
 if __name__ == "__main__":
+    
+    chess_size = get_chess_size()
     chess = Chess(chess_size, screen)
     run(chess) 
         
