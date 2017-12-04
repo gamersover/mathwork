@@ -67,14 +67,14 @@ def display_result(chess_size, start_position):
     after get the maximun score, display the process
     """
     pygame.init()
-    screen_size = [300, 300]
+    screen_size = [chess_size[1]*60, chess_size[0]*60]
     screen = pygame.display.set_mode(screen_size, 0, 32)
-    chess = Chess(chess_size, screen, FPS=3)
+    chess = Chess(chess_size, screen, print_info=False, FPS=3)
     get_game_score(chess, start_position, display=True)
     
 if __name__ == "__main__":
     
-    chess_size = [5,5]
+    chess_size = [5,6]
     start_position, remain = search_max_score(chess_size)   
-    print "the remain of chess is %d" %(remain)
+    print("the remain of chess is %d" %(remain))
     display_result(chess_size, start_position)

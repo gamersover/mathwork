@@ -5,15 +5,14 @@ import pygame
 from chess_class import Chess
 
 pygame.init()
-screen_size = [300, 300]
-screen = pygame.display.set_mode(screen_size, 0, 32)
 Action = ["up", "down", "left", "right"]
 
 def get_chess_size():
     while True:
-        chess_x, chess_y = map(int, raw_input("please your chess size like 4 4:").split())
+        chess_x, chess_y = map(int, input("please your chess size like 4 4:").split())
         if chess_x < 3 and chess_y < 3:
             print("your input chess size is meaningless!")
+            continue
         else:
             return [chess_x, chess_y]
 
@@ -41,6 +40,8 @@ def run(chess):
 if __name__ == "__main__":
     
     chess_size = get_chess_size()
+    screen_size = [chess_size[1]*60, chess_size[0]*60]
+    screen = pygame.display.set_mode(screen_size, 0, 32)
     chess = Chess(chess_size, screen)
     run(chess) 
         
