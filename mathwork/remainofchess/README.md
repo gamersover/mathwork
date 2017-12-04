@@ -2,7 +2,6 @@
 
 ## file explantation
 >  problem_solver.py  
-
 > * get the maximum score or the minimum remain for all possible start_position
 
 ## Prerequisites
