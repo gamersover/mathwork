@@ -1,3 +1,6 @@
+"""
+play game you should run this file
+"""
 import pygame
 from chess_class import Chess
 

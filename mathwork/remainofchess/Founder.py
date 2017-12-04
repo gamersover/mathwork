@@ -1,19 +1,23 @@
+"""
+a definition of founder
+it found four direction <up, down , left, right> of a chess, then return is founded and the new position 
+"""
 class Founder:
     
     def __init__(self):
-        pass
-    
+        
+        self.is_found  = []
+        self.new_position = []
+        
     def found(self, matrix, position):
         
-        up_is_found, up_new_position = self.found_up(matrix, position)
-        down_is_found, down_new_position = self.found_down(matrix, position)
-        left_is_found, left_new_position = self.found_left(matrix, position)
-        right_is_found, right_new_position = self.found_right(matrix, position)
-        
-        is_found = [up_is_found, down_is_found, left_is_found, right_is_found]
-        new_position = [up_new_position, down_new_position, left_new_position, right_new_position]
-        return is_found, new_position
-        
+        self.__init__()
+        self.found_up(matrix, position)
+        self.found_down(matrix, position)
+        self.found_left(matrix, position)
+        self.found_right(matrix, position)
+        return self.is_found, self.new_position
+    
     def found_up(self, matrix, position):
         start = position[1] - 1
         s = 0
@@ -23,9 +27,11 @@ class Founder:
             if s< 2:
                 start -= 1
         if s==2:
-            return True, [position[0], start]
+            found, n_position = True, [position[0], start]
         else:
-            return False, []
+            found, n_position = False, []
+        self.is_found.append(found)
+        self.new_position.append(n_position)
         
     def found_down(self, matrix, position):
         chess_size = matrix.shape[1]
@@ -37,10 +43,12 @@ class Founder:
             if s< 2:
                 start += 1
         if s==2:
-            return True, [position[0], start]
+            found, n_position = True, [position[0], start]
         else:
-            return False, []
-    
+            found, n_position = False, []
+        self.is_found.append(found)
+        self.new_position.append(n_position)
+        
     def found_left(self, matrix, position):
         start = position[0] - 1
         s = 0
@@ -50,9 +58,11 @@ class Founder:
             if s< 2:
                 start -= 1
         if s==2:
-            return True, [start, position[1]]
+            found, n_position = True, [start, position[1]]
         else:
-            return False, []
+            found, n_position = False, []
+        self.is_found.append(found)
+        self.new_position.append(n_position)
         
     def found_right(self, matrix, position):
         chess_size = matrix.shape[0]
@@ -64,7 +74,9 @@ class Founder:
             if s< 2:
                 start += 1
         if s==2:
-            return True, [start, position[1]]
+            found, n_position = True, [start, position[1]]
         else:
-            return False, []
+            found, n_position = False, []
+        self.is_found.append(found)
+        self.new_position.append(n_position)
     
