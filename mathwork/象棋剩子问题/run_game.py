@@ -22,6 +22,7 @@ def run(chess):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
+                action = None
                 if event.key == pygame.K_UP:
                     action = Action[0]
                 elif event.key == pygame.K_DOWN:
